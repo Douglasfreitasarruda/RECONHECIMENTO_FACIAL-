@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+build/
+dist/
+*.egg-info/
+
+# Ambientes virtuais e configuração local
+.venv/
+venv/
+env/
+.env
+.env.*
+!.env.example
+
+# IDE e sistema operacional
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Dados biométricos e arquivos gerados pela aplicação
+data/*
+!data/.gitkeep

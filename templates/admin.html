@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin - NanoMaq</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="pagina-ponto">
+
+  <header class="navbar">
+    <div class="logo">
+      <span>NANO</span>MAQ
+    </div>
+
+    <nav class="menu">
+      <a href="{{ url_for('admin') }}" class="menu-item ativo">ADM</a>
+      <a href="{{ url_for('ponto') }}" class="menu-item">Bater Ponto</a>
+      <a href="{{ url_for('relatorio') }}" class="menu-item">Relatório</a>
+      <a href="{{ url_for('logout') }}" class="menu-item">Sair</a>
+    </nav>
+  </header>
+
+  <div class="bg-overlay"></div>
+
+  <main class="ponto-container">
+    <section class="ponto-card">
+
+      <div class="logo-topo">
+        <h1><span>NANO</span>MAQ</h1>
+        <p>Painel administrativo</p>
+      </div>
+
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <div class="flash-mensagens">
+            {% for message in messages %}
+              <p class="flash-msg">{{ message }}</p>
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endwith %}
+
+      <form action="{{ url_for('cadastrar') }}" method="POST" class="form-admin">
+        <input
+          type="text"
+          name="nome"
+          placeholder="Nome do novo funcionário"
+          class="input-admin"
+          required
+        >
+        <button type="submit" class="btn-catraca">
+          Cadastrar funcionário
+        </button>
+      </form>
+
+      <form action="{{ url_for('treinar') }}" method="POST" class="form-admin">
+        <button type="submit" class="btn-catraca">
+          Treinar modelo
+        </button>
+      </form>
+
+    </section>
+  </main>
+
+</body>
+</html>

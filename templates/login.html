@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login ADM - NanoMaq</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="pagina-ponto">
+
+  <div class="bg-overlay"></div>
+
+  <main class="ponto-container">
+    <section class="ponto-card login-card">
+
+      <div class="logo-topo">
+        <h1><span>NANO</span>MAQ</h1>
+        <p>Acesso administrativo</p>
+      </div>
+
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <div class="flash-mensagens">
+            {% for message in messages %}
+              <p class="flash-msg">{{ message }}</p>
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endwith %}
+
+      <form action="{{ url_for('login') }}" method="POST" class="form-admin">
+        <input
+          type="password"
+          name="senha"
+          placeholder="Digite a senha do administrador"
+          class="input-admin"
+          required
+        >
+
+        <button type="submit" class="btn-catraca">
+          Entrar como ADM
+        </button>
+      </form>
+
+      <a href="{{ url_for('ponto') }}" class="btn-voltar-ponto">Voltar para ponto</a>
+
+    </section>
+  </main>
+
+</body>
+</html>

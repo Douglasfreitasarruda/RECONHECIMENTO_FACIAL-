@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NanoMaq - Sistema de Ponto</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="pagina-ponto">
+
+  <header class="navbar">
+    <div class="logo">
+      <span>NANO</span>MAQ
+    </div>
+
+    <nav class="menu">
+      <a href="{{ url_for('admin') }}" class="menu-item">ADM</a>
+      <a href="{{ url_for('ponto') }}" class="menu-item ativo">Bater Ponto</a>
+      <a href="{{ url_for('relatorio') }}" class="menu-item">Relatório</a>
+    </nav>
+  </header>
+
+  <div class="bg-overlay"></div>
+
+  <main class="ponto-container">
+    <section class="ponto-card">
+
+      <div class="logo-topo">
+        <h1><span>NANO</span>MAQ</h1>
+        <p>Sistema de Ponto Facial</p>
+      </div>
+
+      <div class="catraca-box">
+        <div class="scanner-ring {% if resultado and resultado.sucesso %}success{% elif resultado and not resultado.sucesso %}error{% endif %}" id="scannerRing">
+          <div class="scanner-core">
+            <div class="scanner-face-icon">👤</div>
+          </div>
+          <div class="scan-line"></div>
+        </div>
+
+        <div class="catraca-status">
+          {% if resultado %}
+            {{ resultado.mensagem }}
+          {% else %}
+            Posicione o rosto para validação
+          {% endif %}
+        </div>
+
+        <div class="catraca-substatus">
+          {% if resultado and resultado.sucesso %}
+            Funcionário identificado com sucesso
+          {% elif resultado and not resultado.sucesso %}
+            Não autorizado
+          {% else %}
+            Clique para iniciar o reconhecimento
+          {% endif %}
+        </div>
+      </div>
+
+      <form action="{{ url_for('reconhecer') }}" method="POST" id="formReconhecimento">
+        <button type="submit" class="btn-catraca">
+          Iniciar batida de ponto
+        </button>
+      </form>
+
+    </section>
+  </main>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

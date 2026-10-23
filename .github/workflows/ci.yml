@@ -1,0 +1,34 @@
+name: Testes
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      FLASK_SECRET_KEY: chave-exclusiva-para-testes-automatizados
+      ADMIN_PASSWORD: senha-exclusiva-para-testes
+
+    steps:
+      - name: Baixar o código
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Instalar dependências
+        run: python -m pip install -r requirements.txt
+
+      - name: Verificar sintaxe
+        run: python -m compileall -q app.py main.py sistema_ponto tests
+
+      - name: Executar testes
+        run: python -m unittest discover -s tests -v

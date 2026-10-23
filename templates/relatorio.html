@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Relatório - NanoMaq</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="pagina-ponto">
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="logo">
+      <span>NANO</span>MAQ
+    </div>
+
+    <nav class="menu">
+      <a href="{{ url_for('admin') }}" class="menu-item">ADM</a>
+      <a href="{{ url_for('ponto') }}" class="menu-item">Bater Ponto</a>
+      <a href="{{ url_for('relatorio') }}" class="menu-item ativo">Relatório</a>
+    </nav>
+  </header>
+
+  <div class="bg-overlay"></div>
+
+  <main class="ponto-container">
+    <section class="ponto-card">
+
+      <div class="logo-topo">
+        <h1><span>NANO</span>MAQ</h1>
+        <p>Relatório de Ponto</p>
+      </div>
+
+      <div class="tabela-container">
+
+        <table class="tabela-relatorio">
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Dia</th>
+              <th>Data</th>
+              <th>Hora</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {% for dados in linhas[1:] %}
+              <tr>
+                <td>{{ dados[0] }}</td>
+                <td>{{ dados[1] }}</td>
+                <td>{{ dados[2] }}</td>
+                <td>{{ dados[3] }}</td>
+                <td>{{ dados[6] }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+        {% if not linhas %}
+          <p class="sem-dados">Nenhum registro encontrado.</p>
+        {% endif %}
+
+      </div>
+
+    </section>
+  </main>
+
+</body>
+</html>
